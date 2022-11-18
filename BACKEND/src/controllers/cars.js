@@ -60,10 +60,33 @@ const updateCar = async (req, res) => {
         });
 
         if (!updatedCar) {
-            return res.status(400).json({mensagem: "O carro não foi atualizado"});
+            return res.status(400).json({ mensagem: "O carro não foi atualizado" });
         }
 
-        return res.status(200).json({mensagem: "Carro atualizado com sucesso!"});
+        return res.status(200).json({ mensagem: "Carro atualizado com sucesso!" });
+
+    } catch (error) {
+        return res.status(500).json({ mensagem: "Erro interno do servidor." });
+    }
+}
+
+const deleteCar = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const car = await knex('carros').where({ id }).first();
+
+        if (!car) {
+            return res.status(404).json({ mensagem: "O carro não existe cadastrado no banco de dados do sistema." });
+        }
+
+        const carDeleted = await knex('carros').where({ id }).del();
+
+        if (!carDeleted) {
+            return res.status(400).json({mensagem: "O carro não foi excluído."});
+        }
+
+        return res.status(200).json({mensagem: "Carro excluído com sucesso!"});
 
     } catch (error) {
         return res.status(500).json({ mensagem: "Erro interno do servidor." });
@@ -73,5 +96,6 @@ const updateCar = async (req, res) => {
 module.exports = {
     registerCar,
     listCars,
-    updateCar
+    updateCar,
+    deleteCar
 }
