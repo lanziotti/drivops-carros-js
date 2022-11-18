@@ -9,6 +9,8 @@ const { registerCar, listCars, updateCar, deleteCar } = require('../controllers/
 const carSchema = require('../validations/carSchema');
 const { registerSeller, listSellers, updateSeller, deleteSeller } = require('../controllers/sellers');
 const sellerSchema = require('../validations/sellerSchema');
+const saleSchema = require('../validations/saleSchema');
+const { registerSale } = require('../controllers/sales');
 
 const routes = express();
 
@@ -26,5 +28,7 @@ routes.post('/vendedores', validateRequest(sellerSchema), registerSeller);
 routes.get('/vendedores', listSellers);
 routes.put('/vendedores/:id', validateRequest(sellerSchema), updateSeller);
 routes.delete('/vendedores/:id', deleteSeller);
+
+routes.post('/vendas', validateRequest(saleSchema), registerSale);
 
 module.exports = routes;
