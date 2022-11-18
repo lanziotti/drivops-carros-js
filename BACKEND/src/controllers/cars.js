@@ -20,11 +20,26 @@ const registerCar = async (req, res) => {
         return res.status(201).json(registeringCar[0]);
 
     } catch (error) {
-        console.log(error)
         return res.status(500).json({ mensagem: "Erro interno do servidor." });
     }
 }
 
+const listCars = async (req, res) => {
+    try {
+        const cars = await knex('carros');
+
+        for (const car of cars) {
+            car.valor = Number(car.valor);
+        }
+
+        return res.status(200).json(cars);
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ mensagem: "Erro interno do servidor." });
+    }
+}
 module.exports = {
-    registerCar
+    registerCar,
+    listCars
 }

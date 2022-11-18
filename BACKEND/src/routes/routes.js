@@ -5,7 +5,7 @@ const validateRequest = require('../middlewares/validateRequest');
 const userSchema = require('../validations/userSchema');
 const loginSchema = require('../validations/loginSchema');
 const { authenticationFilter } = require('../middlewares/authentication');
-const { registerCar } = require('../controllers/cars');
+const { registerCar, listCars } = require('../controllers/cars');
 const carSchema = require('../validations/carSchema');
 
 const routes = express();
@@ -15,6 +15,7 @@ routes.post('/login', validateRequest(loginSchema), login);
 
 routes.use(authenticationFilter);
 
-routes.post('/carro', validateRequest(carSchema), registerCar);
+routes.post('/carros', validateRequest(carSchema), registerCar);
+routes.get('/carros', listCars);
 
 module.exports = routes;
