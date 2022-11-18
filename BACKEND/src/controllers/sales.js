@@ -46,6 +46,18 @@ const registerSale = async (req, res) => {
     }
 }
 
+const listSales = async (req, res) => {
+    try {
+        const sales = await knex('vendas');
+
+        return res.status(200).json(sales);
+
+    } catch (error) {
+        return res.status(500).json({ mensagem: "Erro interno do servidor." });
+    }
+}
+
 module.exports = {
-    registerSale
+    registerSale,
+    listSales
 }
