@@ -7,7 +7,7 @@ const loginSchema = require('../validations/loginSchema');
 const { authenticationFilter } = require('../middlewares/authentication');
 const { registerCar, listCars, updateCar, deleteCar } = require('../controllers/cars');
 const carSchema = require('../validations/carSchema');
-const { registerSeller, listSellers } = require('../controllers/sellers');
+const { registerSeller, listSellers, updateSeller } = require('../controllers/sellers');
 const sellerSchema = require('../validations/sellerSchema');
 
 const routes = express();
@@ -24,5 +24,6 @@ routes.delete('/carros/:id', deleteCar);
 
 routes.post('/vendedores', validateRequest(sellerSchema), registerSeller);
 routes.get('/vendedores', listSellers);
+routes.put('/vendedores/:id', validateRequest(sellerSchema), updateSeller);
 
 module.exports = routes;
