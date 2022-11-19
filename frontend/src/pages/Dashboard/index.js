@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { notifyError, notifySucess } from '../../utils/notifications';
 import { useState } from 'react';
 import { clear, getItem } from '../../utils/storage';
+import ChartResultsBySellers from '../../components/ChartResultsBySellers';
 
 const defaultFormCar = {
   marca: '',
@@ -265,7 +266,7 @@ function Dashboard() {
             />
           </div>
           <div className="content-inputs">
-            <label htmlFor="vendedor_id">Número identificador do carro</label>
+            <label htmlFor="vendedor_id">Número identificador do vendedor</label>
             <input
               type="number"
               name="vendedor_id"
@@ -277,6 +278,7 @@ function Dashboard() {
         </form>
       </div>
       <h2>Gráficos para Gerenciamento</h2>
+      <ChartResultsBySellers />
     </div>
   );
 }
