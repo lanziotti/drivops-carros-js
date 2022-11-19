@@ -90,10 +90,33 @@ const updateSale = async (req, res) => {
         });
 
         if (!updatedSale) {
-            return res.status(400).json({mensagem: "A venda não foi atualizada."});
+            return res.status(400).json({ mensagem: "A venda não foi atualizada." });
         }
 
-        return res.status(200).json({mensagem: "Venda atualizada com sucesso!"});
+        return res.status(200).json({ mensagem: "Venda atualizada com sucesso!" });
+
+    } catch (error) {
+        return res.status(500).json({ mensagem: "Erro interno do servidor." });
+    }
+}
+
+const deleteSale = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const sale = await knex('vendas').where({ id }).first();
+
+        if (!sale) {
+            return res.status(404).json({ mensagem: "A venda não existe cadastrada no banco de dados." });
+        }
+
+        const saleDeleted = await knex('vendas').where({ id }).del();
+
+        if (!saleDeleted) {
+            return res.status(400).json({mensagem: "A venda não foi excluída."});
+        }
+
+        return res.status(200).json({mensagem: "Venda excluída com sucesso!"});
 
     } catch (error) {
         return res.status(500).json({ mensagem: "Erro interno do servidor." });
@@ -103,5 +126,6 @@ const updateSale = async (req, res) => {
 module.exports = {
     registerSale,
     listSales,
-    updateSale
+    updateSale,
+    deleteSale
 }
