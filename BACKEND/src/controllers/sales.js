@@ -50,6 +50,10 @@ const listSales = async (req, res) => {
     try {
         const sales = await knex('vendas');
 
+        for (const sale of sales) {
+            sale.valor = Number(sale.valor);
+        }
+
         return res.status(200).json(sales);
 
     } catch (error) {
