@@ -1,7 +1,14 @@
-import { Routes, Route } from 'react-router-dom';
+import { Navigate, Outlet, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import RegisterUser from './pages/RegisterUser';
 import Dashboard from './pages/Dashboard';
+import { getItem } from './utils/storage';
+
+function ProtectedRoutes({ redirectTo }) {
+    const token = getItem('token');
+
+    return token ? <Outlet /> : <Navigate to={redirectTo} />
+}
 
 function DashboardRoutes() {
     return (
@@ -9,7 +16,9 @@ function DashboardRoutes() {
             <Route path='/' element={<Login />} />
             <Route path='/sign-up' element={<RegisterUser />} />
 
-            <Route path='/dashboard' element={<Dashboard />} />
+            <Route element={<ProtectedRoutes redirectTo='/' />}>
+                <Route path='/dashboard' element={<Dashboard />} />
+            </Route>
         </Routes>
     );
 }
