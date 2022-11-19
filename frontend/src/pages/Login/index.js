@@ -11,13 +11,13 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    // useEffect(() => {
-    //     const token = getItem('token');
+    useEffect(() => {
+        const token = getItem('token');
 
-    //     if (token) {
-    //         navigate('/dashboard');
-    //     }
-    // }, [navigate]);
+        if (token) {
+            navigate('/dashboard');
+        }
+    }, [navigate]);
 
     async function handleSubmit(e) {
         e.preventDefault();
