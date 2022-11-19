@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getItem, setItem } from '../../utils/storage';
 import api from '../../services/api';
+import { notifyError } from '../../utils/notifications';
 
 function Login() {
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ function Login() {
 
         try {
             if (!email || !password) {
-                return;
+                return notifyError('Todos os campos são obrigatórios.');
             }
 
             const response = await api.post('/login', {
@@ -32,7 +33,7 @@ function Login() {
             });
 
             if (response.status > 204) {
-                console.log(response.data.mensagem)
+                return notifyError(response.data.mensagem);
             }
 
             const { usuario, token } = response.data;
@@ -44,7 +45,7 @@ function Login() {
             navigate('/dashboard');
 
         } catch (error) {
-            console.log(error)
+            notifyError(error.response.data.mensagem);
         }
     }
 
@@ -62,7 +63,6 @@ function Login() {
                         <input
                             type="email"
                             name="email"
-                            required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -72,7 +72,6 @@ function Login() {
                         <input
                             type="password"
                             name="password"
-                            required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />

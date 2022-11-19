@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import RegisterUser from './pages/RegisterUser';
 import Dashboard from './pages/Dashboard';
 import { getItem } from './utils/storage';
+import { ToastContainer } from 'react-toastify';
 
 function ProtectedRoutes({ redirectTo }) {
     const token = getItem('token');
@@ -12,14 +13,17 @@ function ProtectedRoutes({ redirectTo }) {
 
 function DashboardRoutes() {
     return (
-        <Routes>
-            <Route path='/' element={<Login />} />
-            <Route path='/sign-up' element={<RegisterUser />} />
+        <>
+            <ToastContainer />
+            <Routes>
+                <Route path='/' element={<Login />} />
+                <Route path='/sign-up' element={<RegisterUser />} />
 
-            <Route element={<ProtectedRoutes redirectTo='/' />}>
-                <Route path='/dashboard' element={<Dashboard />} />
-            </Route>
-        </Routes>
+                <Route element={<ProtectedRoutes redirectTo='/' />}>
+                    <Route path='/dashboard' element={<Dashboard />} />
+                </Route>
+            </Routes>
+        </>
     );
 }
 
