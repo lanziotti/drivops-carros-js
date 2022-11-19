@@ -1,0 +1,17 @@
+header {
+    height: 180px;
+    width: 100%;
+    background-image: url(../../assets/background-image.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+    align-items: center;
+}
+
+header img {
+    height: 150px;
+    width: 150px;
+    margin-left: 40px;
+}
