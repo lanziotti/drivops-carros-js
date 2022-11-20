@@ -69,7 +69,7 @@ const updateSale = async (req, res) => {
         const sale = await knex('vendas').where({ id }).first();
 
         if (!sale) {
-            return res.status(404).json({ mensagem: "A venda não existe cadastrada no bancode dados." });
+            return res.status(404).json({ mensagem: "A venda não existe cadastrada no banco de dados." });
         }
 
         const car = await knex('carros').where({ id: carro_id }).first();
@@ -111,7 +111,7 @@ const deleteSale = async (req, res) => {
         const sale = await knex('vendas').where({ id }).first();
 
         if (!sale) {
-            return res.status(404).json({ mensagem: "A venda não existe cadastrada no banco de dados." });
+            return res.status(404).json({ mensagem: "A venda não existe cadastrada no banco de dados do sistema." });
         }
 
         const saleDeleted = await knex('vendas').where({ id }).del();
