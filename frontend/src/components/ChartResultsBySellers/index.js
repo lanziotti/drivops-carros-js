@@ -90,7 +90,7 @@ export default function ChartResultsBySellers() {
     return (
         <Chart
             chartType="ColumnChart"
-            width="100%"
+            width="80%"
             height="400px"
             data={data}
             chartLanguage="pt-BR"

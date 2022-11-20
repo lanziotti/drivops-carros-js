@@ -6,6 +6,8 @@ import { notifyError, notifySucess } from '../../utils/notifications';
 import { useState } from 'react';
 import { clear, getItem } from '../../utils/storage';
 import ChartResultsBySellers from '../../components/ChartResultsBySellers';
+import SalesChartByMonth from '../../components/SalesChartByMonth';
+import GraphAverageValuesPerMonth from '../../components/GraphAverageValuesPerMonth';
 
 const defaultFormCar = {
   marca: '',
@@ -278,7 +280,11 @@ function Dashboard() {
         </form>
       </div>
       <h2>Gráficos para Gerenciamento</h2>
-      <ChartResultsBySellers />
+      <div className='content-charts'>
+        <ChartResultsBySellers />
+        <SalesChartByMonth />
+        <GraphAverageValuesPerMonth />
+      </div>
     </div>
   );
 }
