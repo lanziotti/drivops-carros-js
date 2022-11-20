@@ -261,7 +261,7 @@ function Dashboard() {
           <div className="content-inputs">
             <label htmlFor="data_venda">Data da venda</label>
             <input
-              type="text"
+              type="date"
               name="data_venda"
               value={formSale.data_venda}
               onChange={handleChangeFormSale}
