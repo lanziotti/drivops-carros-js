@@ -20,7 +20,7 @@ let december = [];
 let arrayData = [];
 
 export const data = [
-    ["Element", "Vendas X Mês", { role: "style" }]
+    ["Mês", "Vendas X Mês", { role: "style" }]
 ];
 
 export default function SalesChartByMonth() {
